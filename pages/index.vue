@@ -2,6 +2,10 @@
 definePageMeta({
   layout: "starter",
 });
+
+const steps = ref(0)
+
+
 </script>
 
 <template>
@@ -19,10 +23,16 @@ definePageMeta({
 
       <h1 class="mb-1 text-3xl font-extrabold leading-none" >Grocery and to do lists</h1>
       <h3 class="mb-1 text-lg  leading-none">Out shopping, or you have need to get something done? Add it to your lists</h3>
+      <button v-if="steps <2 " @click="steps++" type="button" class="text-white mt-6 mb-3 w-full  bg-gradient-to-br from-pink-400 to-orange-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">NEXT</button>
+        <button v-else type="button" class="text-white mt-6 mb-3 w-full  bg-gradient-to-br from-pink-400 to-orange-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Start</button>
+        <div class="flex justify-center mt-2 gap-2">
+      <div  class="w-5 h-5 bg-pink-200 rounded-full" :class="[{'bg-pink-800': steps == 0}]"></div>
+      <div class="w-5 h-5 bg-pink-200 rounded-full" :class="[{'bg-pink-800': steps == 1}]"></div>
+      <div class="w-5 h-5 bg-pink-200 rounded-full" :class="[{'bg-pink-800': steps == 2}]"></div>
       
-      <button type="button" class="text-white mt-6 w-full  bg-gradient-to-br from-pink-400 to-orange-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">NEXT</button>
-
+     </div>
     </div>
+    
   </div>
 </template>
 
