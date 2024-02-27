@@ -1,8 +1,42 @@
-<script setup>
+<script setup lang="ts">
+definePageMeta({
+  layout: "starter",
+});
 </script>
+
 <template>
-    <div>
-        <p>hello</p>
-        <NuxtLink class="text-green-500 font-bold " to="/back" >back</NuxtLink>
+  <div>
+    <div class="flex items-center justify-center h-screen">
+      <div class="circle" style="margin-top: -100px">
+        <img
+          class="h-full w-full object-contain duration-300 rounded-lg cursor-pointer filter grayscale hover:grayscale-0"
+          src="public/img/girl-character.png"
+          alt="image description"
+        />
+      </div>
     </div>
+    <div class="absolute bottom-0 w-screen   bg-gray-200 p-10 mb-20 cursor-pointer filter grayscale hover:grayscale-0">
+
+      <h1 class="mb-1 text-3xl font-extrabold leading-none" >Grocery and to do lists</h1>
+      <h3 class="mb-1 text-lg  leading-none">Out shopping, or you have need to get something done? Add it to your lists</h3>
+      
+      <button type="button" class="text-white mt-6 w-full  bg-gradient-to-br from-pink-400 to-orange-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">NEXT</button>
+
+    </div>
+  </div>
 </template>
+
+
+<style>
+.circle {
+  @apply w-3/4 h-72;
+
+  
+  border-radius: 80%; /* This makes it a perfect circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; /* Text color */
+  font-weight: bold;
+}
+</style>
