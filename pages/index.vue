@@ -36,7 +36,7 @@ const slideSteps = ref ([
     <div class="flex items-center justify-center h-screen">
       <div class="circle" style="margin-top: -100px">
         <img
-          class="h-full w-full object-contain duration-300 rounded-lg cursor-pointer filter grayscale hover:grayscale-0"
+          class="h-full w-full object-contain duration-300 rounded-lg"
        
           :src="slideSteps[steps].image"
           alt="image description"
