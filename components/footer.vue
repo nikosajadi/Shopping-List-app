@@ -11,18 +11,21 @@
           </row>
         </div>
         <div>
-          <row class="inline-flex w-full justify-center shadow-sm">
-            <span class="table-group">Items</span>
+          <row class="inline-flex w-full justify-center ">
+            <!-- <span class="table-group">Items</span> -->
+            <Icon name="solar:bill-list-bold" color="gray" size="30" />
           </row>
         </div>
         <div>
-          <row class="inline-flex w-full justify-center shadow-sm">
-            <span class="table-group">Family</span>
+          <row class="inline-flex w-full justify-center ">
+            <!-- <span class="table-group">Family</span> -->
+            <Icon name="solar:users-group-rounded-bold-duotone" color="gray-400" size="30" />
           </row>
         </div>
         <div>
-          <row class="inline-flex w-full justify-center shadow-sm">
-            <span class="table-group">Profile</span>
+          <row class="inline-flex w-full justify-center ">
+            <!-- <span class="table-group">Profile</span> -->
+            <Icon name="solar:emoji-funny-circle-line-duotone" color="gray-400" size="30" />
           </row>
         </div>
       </div>

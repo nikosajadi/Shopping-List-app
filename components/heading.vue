@@ -1,31 +1,43 @@
 <script setup>
-const toggleMenu = () => {
-  // Your logic to toggle the menu goes here
-};
+const isOpen = ref(false);
+
+
 </script>
+
 <template>
-  <header
-    class="flex justify-between items-center py-4 px-6 bg-green shadow-md"
+  <header class="flex justify-between items-center py-8 px-6 bg-green shadow-md"
   >
-    <h1 class="text-2xl font-bold text-gray-800">Your Title Here</h1>
-    <button
-      @click="toggleMenu"
-      class="block lg:hidden text-gray-800 focus:outline-none"
-    >
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16m-7 6h7"
-        ></path>
-      </svg>
+  <div class="sidebar" :class="[{ 'close': !isOpen }]">
+      <!-- isopen=!isopen -->
+      <button @click= "isOpen = !isOpen" type="button" class="button">
+        Close
+      </button>
+    </div>
+
+
+  <button @click="isOpen = !isOpen" class="block lg:hidden text-gray-800 focus:outline-none">
+      <!-- Assuming 'Icon' component is correctly imported and used -->
+      <Icon name="solar:hamburger-menu-bold" color="gray-400" size="30" />
     </button>
+
+
+
+    <h1 class="text-2xl font-bold text-gray-800  text-justify">
+      FAMILY SHOPPING
+    </h1>
+
   </header>
+
+
+
 </template>
+
+<style>
+.sidebar {
+  @apply bg-orange-200 text-white font-bold w-60 h-full z-50 fixed top-0  left-0 rounded-lg;
+  transition: all ease-in-out 0.5s;
+}
+.close {
+  @apply  -left-60;
+}
+</style>

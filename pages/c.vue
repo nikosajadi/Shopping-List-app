@@ -6,7 +6,7 @@ definePageMeta({
 
 <template>
   <div>
-    <p>This is the content of your page.</p>
+    
   </div>
 </template>
   
