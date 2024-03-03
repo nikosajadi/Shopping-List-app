@@ -54,7 +54,7 @@ const singUp = () => {
     </div>
 
     <div v-if="mode === 'login'">
-      <form class="form-group">
+      <div class="form-group">
         <div class="md:w-2/3">
           <input
             v-model="Email"
@@ -76,11 +76,11 @@ const singUp = () => {
             Sign In
           </button>
         </div>
-      </form>
+      </div>
     </div>
 
     <div v-else class="active">
-      <form class="form-group">
+      <div class="form-group">
         <div class="md:w-2/3">
           <input
             v-model="Email"
@@ -121,7 +121,7 @@ const singUp = () => {
             Sign Up
           </button>
         </div>
-      </form>
+      </div>
     </div>
     <NuxtLink to="/">Back</NuxtLink>
   </div>
