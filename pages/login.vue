@@ -20,7 +20,7 @@ const singUp = () => {
     alert("Please fill all items...");
   } else {
     router.push({
-      path: "/c",
+      path: "/home",
     });
   }
 };
