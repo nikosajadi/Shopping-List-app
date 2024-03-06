@@ -42,7 +42,10 @@ const handleAddButton = () => {
     </div>
     <!-- End : step 1 :................... -->
 
-    <!-- Start : step 2  fill shopping list -->
+    <!-- Start : step 2  
+    
+    
+    20-->
     <div v-else class="mt-10 px-5">
       <h1 class="h1-title">{{ nameList }}</h1>
       <div class="input-container flex flex-row">

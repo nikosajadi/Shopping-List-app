@@ -1,4 +1,7 @@
-<script setup lang="ts">
+<script setup>
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
 definePageMeta({
   layout: "starter",
 });
@@ -12,16 +15,36 @@ const username = ref("");
 
 const singUp = () => {
   if (
-    Email.value == "" ||
-    Password.value == "" ||
-    displayName.value == "" ||
-    username.value == ""
+    Email.value === "" ||
+    Password.value === "" ||
+    displayName.value === "" ||
+    username.value === ""
   ) {
-    alert("Please fill all items...");
-  } else {
-    router.push({
-      path: "/home",
+    toast("Hello! fill items!", {
+      theme: "dark",
+      type: "success",
+      position: "bottom-right",
+      rtl: true,
+      transition: "zoom",
+      dangerouslyHTMLString: true,
     });
+  } else {
+    router.push({ path: "/home" });
+  }
+};
+
+const signIn = () => {
+  if (Email.value === "" || Password.value === "") {
+    toast("Hello! fill items!", {
+      theme: "dark",
+      type: "success",
+      position: "bottom-right",
+      rtl: true,
+      transition: "zoom",
+      dangerouslyHTMLString: true,
+    });
+  } else {
+    router.push({ path: "/new" });
   }
 };
 </script>
@@ -41,13 +64,13 @@ const singUp = () => {
         <span
           class="table-group"
           @click="mode = 'login'"
-          :class="{ 'active': mode == 'login' }"
+          :class="{ active: mode == 'login' }"
           >login</span
         >
         <span
           class="table-group"
           @click="mode = 'Register'"
-          :class="{ 'active': mode == 'Register' }"
+          :class="{ active: mode == 'Register' }"
           >Register</span
         >
       </row>
@@ -71,6 +94,7 @@ const singUp = () => {
             class="form-control"
           />
           <button
+            @click="signIn"
             class="text-white mt-6 mb-3 w-full font-bold py-4 px-4 rounded-2xl bg-gradient-to-br from-pink-200 to-orange-400"
           >
             Sign In
@@ -123,12 +147,12 @@ const singUp = () => {
         </div>
       </div>
     </div>
-    <NuxtLink to="/">Back</NuxtLink>
+
+    <NuxtLink to="/"></NuxtLink>
   </div>
 </template>
 
 <style>
-
 .table-group {
   @apply mt-9 px-10 py-4 text-sm font-medium text-gray-800   rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white;
 }
@@ -151,7 +175,6 @@ input[type="email"] {
   font-size: 1rem;
   border: 1px solid #e2cdcd;
   border-radius: 0.25rem;
-  @apply rounded-2xl my-3 px-3 py-4 text-gray-800 ;
+  @apply rounded-2xl my-3 px-3 py-4 text-gray-800;
 }
-
 </style>
