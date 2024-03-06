@@ -1,4 +1,8 @@
 <script setup lang="ts">
+
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
 definePageMeta({
   layout: "weeklyshopping",
 });
@@ -9,7 +13,14 @@ const itemList = ref([]);
 
 const goTolist = () => {
   if (nameList.value == "") {
-    alert("Please fill items");
+    toast("Hello🙂! pls fill items!", {
+      theme: "dark",
+      type: "success",
+      position: "bottom-right",
+      rtl: true,
+      transition: "zoom",
+      dangerouslyHTMLString: true,
+    });
   } else {
     status.value = true;
   }
@@ -43,11 +54,10 @@ const handleAddButton = () => {
     <!-- End : step 1 :................... -->
 
     <!-- Start : step 2  
-    
-    
+     
     20-->
     <div v-else class="mt-10 px-5">
-      <h1 class="h1-title">{{ nameList }}</h1>
+      <h1 class="h1-title">🥳{{ nameList }}</h1>
       <div class="input-container flex flex-row">
         <input
           v-model="inputText"
@@ -57,14 +67,20 @@ const handleAddButton = () => {
           aria-label="disabled input"
           class="input"
         />
-        <button @click="handleAddButton">+</button>
+        <button class="relative" @click="handleAddButton">
+          <Icon name="solar:add-square-line-duotone" class="relative rounded h-18 w-18  hover:bg-orange-200 mt-10 mb-4 " color="gray-400" size="30" />
+        </button>
       </div>
       <!-- Display the itemList -->
       <ul>
-        <li v-for="(item, index) in itemList" :key="index">- {{ item }}</li>
+        <li v-for="(item, index) in itemList" :key="index">{{ item }}</li>
       </ul>
     </div>
     <!-- End : step 2 :................... -->
+    
+    <NuxtLink to="/">
+      <p type="button" class=" flex text-orange-400 absolute bottom-20 right-5 h-8 w-8 ">Home</p>
+  </NuxtLink>
   </div>
 </template>
 
@@ -73,7 +89,7 @@ const handleAddButton = () => {
   @apply text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm w-full py-2.5 text-center me-2 mb-2;
 }
 .input {
-  @apply mt-8 mb-4 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500;
+  @apply mt-10 mb-4 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500;
 }
 .h1-title {
   @apply mt-10 pt-10 text-3xl w-full text-center font-extrabold leading-none;
@@ -81,4 +97,6 @@ const handleAddButton = () => {
 .input-container {
   position: relative;
 }
+
+
 </style>

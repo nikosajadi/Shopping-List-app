@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
@@ -20,7 +20,7 @@ const singUp = () => {
     displayName.value === "" ||
     username.value === ""
   ) {
-    toast("Hello! fill items!", {
+    toast("Hello🙂! pls fill items!", {
       theme: "dark",
       type: "success",
       position: "bottom-right",
@@ -35,7 +35,7 @@ const singUp = () => {
 
 const signIn = () => {
   if (Email.value === "" || Password.value === "") {
-    toast("Hello! fill items!", {
+    toast("Hello🙂! pls fill items!", {
       theme: "dark",
       type: "success",
       position: "bottom-right",
@@ -44,7 +44,7 @@ const signIn = () => {
       dangerouslyHTMLString: true,
     });
   } else {
-    router.push({ path: "/new" });
+    router.push({ path: "/home" });
   }
 };
 </script>
