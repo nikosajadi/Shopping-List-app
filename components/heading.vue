@@ -1,7 +1,8 @@
 <script setup>
 
 const router = useRouter();
-
+// get name of logged in user from cookie
+const my_name = useCookie("token_name", { maxAge: 8640 * 1000 });
 const isOpen = ref(false);
 const editProfile = () => {
   router.push({
@@ -20,36 +21,36 @@ const logout = () => {
 
 <template>
   <header
-    class="flex justify-between items-center py-8 px-6 bg-green shadow-md"
+    class="flex justify-between items-center py-8 px-6  shadow-md"
   >
     <div class="sidebar" :class="[{ close: !isOpen }]">
       <!-- isopen=!isopen -->
       <button @click="isOpen = !isOpen" type="button" class="button">
         <Icon name="solar:close-circle-line-duotone" color="gray-400" size="30" />
       </button>
-      <div class="flex w-full text-center">
-      <h1 class="pt-20 text-xl w-full text-center font-extrabold leading-none">
-        Niko Sajadi
+      <div class="flex w-full text-center text-orange-500 ">
+      <h1 class="pt-20 text-xl w-full text-center font-bold leading-none">
+        {{  my_name }}
       </h1>
 
     </div>
  
-      <div class="pt-10">
+      <div class="pt-10 text-orange-500 p-4" >
         <Icon name="solar:clapperboard-edit-broken" color="gray-400" size="30" />
-        <label class="font-sans" >Edit Family</label>
+        <label class="pl-4" >Edit Family</label>
       </div>
-      <div class="pt-10">
+      <div class="pt-10 text-orange-500 p-4">
         <Icon @click="editProfile" name="solar:clapperboard-edit-broken" color="gray-400" size="30" />
-        <label class="font-sans">Edit Profile</label>
+        <label class="pl-4">Edit Profile</label>
       </div>
-      <div class="pt-10">
+      <div class="pt-10 text-orange-500 p-4">
         <Icon name="solar:chat-round-line-broken" color="gray-400" size="30" />
-        <label class="font-sans">Chat</label>
+        <label class="pl-4">Chat</label>
         
       </div>
-      <div class="pt-10 flex">
+      <div class="pt-10 flex text-orange-500 p-4">
         <Icon  name="solar:logout-2-line-duotone" color="gray-400" size="30" />
-        <h2 class="text-orange-400 my-3" style="cursor: pointer" @click="logout"> 
+        <h2 class="text-orange-400 my-3 pl-4" style="cursor: pointer" @click="logout"> 
         LogOut
       </h2>
       
@@ -77,7 +78,7 @@ const logout = () => {
 
 <style>
 .sidebar {
-  @apply bg-orange-200 text-white font-bold w-60 h-full z-50 fixed top-0  left-0 rounded-lg;
+  @apply bg-orange-100 text-white font-bold w-60 h-full z-50 fixed top-0  left-0 rounded-lg;
   transition: all ease-in-out 0.5s;
 }
 .close {

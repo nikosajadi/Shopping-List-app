@@ -55,13 +55,31 @@ const notify = (content: any) => {
   });
 };
 
-const signIn = () => {
+const signIn = async () => {
   if (Email.value === "" || Password.value === "") {
     notify("Hello🙂! pls fill items!");
   } else {
-    router.push({ path: "/home" });
+    try {
+      const response = await axios.post("users/signin", {
+        email: Email.value,
+        password: Password.value,
+        
+      });
+      console.log(response);
+
+      my_token.value = response.data.token;
+      my_id.value = response.data.id;
+      my_name.value = response.data.name;
+      router.push({ path: "/home" });
+    } catch (error) {
+      console.error(error);
+      console.log(error?.response?.data.message);
+      notify(error?.response.data.message);
+    }
   }
 };
+
+
 </script>
 <template>
   <div>
@@ -153,6 +171,7 @@ const signIn = () => {
           >
             Sign Up
           </button>
+
         </div>
       </div>
     </div>
