@@ -1,48 +1,63 @@
 <script setup lang="ts">
-import { toast } from "vue3-toastify";
-import "vue3-toastify/dist/index.css";
-
 definePageMeta({
+  middleware: ["auth-login"],
   layout: "starter",
 });
+
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+import axios from "axios";
+axios.defaults.baseURL = "https://backend-sajadi.mrghanavati.ir/";
+
+// windows V
+const my_token = useCookie("token", { maxAge: 8640 * 1000 });
+const my_id = useCookie("token_id", { maxAge: 8640 * 1000 });
+const my_name = useCookie("token_name", { maxAge: 8640 * 1000 });
 
 const router = useRouter();
 const mode = ref("login");
 const Email = ref("");
 const Password = ref("");
 const displayName = ref("");
-const username = ref("");
 
-const singUp = () => {
-  if (
-    Email.value === "" ||
-    Password.value === "" ||
-    displayName.value === "" ||
-    username.value === ""
-  ) {
-    toast("Hello🙂! pls fill items!", {
-      theme: "dark",
-      type: "success",
-      position: "bottom-right",
-      rtl: true,
-      transition: "zoom",
-      dangerouslyHTMLString: true,
-    });
+const singUp = async () => {
+  if (Email.value === "" || Password.value === "" || displayName.value === "") {
+    notify("Please fill values");
   } else {
-    router.push({ path: "/home" });
+    try {
+      const response = await axios.post("users/signup", {
+        email: Email.value,
+        password: Password.value,
+        name: displayName.value,
+      });
+      console.log(response);
+
+      my_token.value = response.data.token;
+      my_id.value = response.data.id;
+      my_name.value = response.data.name;
+      router.push({ path: "/home" });
+    } catch (error) {
+      console.error(error);
+      console.log(error?.response?.data.message);
+      notify(error?.response.data.message);
+    }
   }
+};
+
+const notify = (content: any) => {
+  toast(content, {
+    theme: "dark",
+    type: "faild",
+    position: "bottom-right",
+    rtl: true,
+    transition: "zoom",
+    dangerouslyHTMLString: true,
+  });
 };
 
 const signIn = () => {
   if (Email.value === "" || Password.value === "") {
-    toast("Hello🙂! pls fill items!", {
-      theme: "dark",
-      type: "success",
-      position: "bottom-right",
-      rtl: true,
-      transition: "zoom",
-      dangerouslyHTMLString: true,
-    });
+    notify("Hello🙂! pls fill items!");
   } else {
     router.push({ path: "/home" });
   }
@@ -57,7 +72,7 @@ const signIn = () => {
     </div>
 
     <div>
-      <row
+      <div
         class="inline-flex w-full justify-center shadow-sm w-screen"
         role="group"
       >
@@ -73,7 +88,7 @@ const signIn = () => {
           :class="{ active: mode == 'Register' }"
           >Register</span
         >
-      </row>
+      </div>
     </div>
 
     <div v-if="mode === 'login'">
@@ -120,13 +135,7 @@ const signIn = () => {
             placeholder="Password"
             class="form-control"
           />
-          <input
-            v-model="username"
-            type="text"
-            id="username"
-            placeholder="Username"
-            class="form-control"
-          />
+
           <h3 class="mb-5 mt-5 text-ml leading-none text-gray-400">
             Other users can add you to their family by searching for your
             username
