@@ -8,6 +8,14 @@ const editProfile = () => {
       path: "/profile",
     });
 }
+
+const logout = () => {
+  const my_token = useCookie("token");
+  my_token.value = undefined;
+  router.push({ path: "/login" });
+};
+
+
 </script>
 
 <template>
@@ -39,6 +47,16 @@ const editProfile = () => {
         <label class="font-sans">Chat</label>
         
       </div>
+      <div class="pt-10 flex">
+        <Icon  name="solar:logout-2-line-duotone" color="gray-400" size="30" />
+        <h2 class="text-orange-400 my-3" style="cursor: pointer" @click="logout"> 
+        LogOut
+      </h2>
+      
+      
+        
+      </div>
+
     </div>
 
     <button
