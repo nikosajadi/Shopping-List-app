@@ -1,15 +1,22 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: ["auth-user"],
+  layout: "weeklyshopping",
+});
 
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+import axios from "axios";
+axios.defaults.baseURL = "https://backend-sajadi.mrghanavati.ir/";
 
-definePageMeta({
-  layout: "weeklyshopping",
-});
+
+const router = useRouter();
 const status = ref(false);
 const nameList = ref("");
 const inputText = ref("");
 const itemList = ref([]);
+const my_id = useCookie("token_id");
+
 
 const goTolist = () => {
   if (nameList.value == "") {
@@ -31,7 +38,44 @@ const handleAddButton = () => {
   itemList.value.push(inputText.value);
   // Clear the input after adding the value to the list
   inputText.value = "";
+}; 
+
+
+const saveList = async () => {
+  if (nameList.value === "" ) {
+    notify("Pls choose name for shopping list");
+  } else if (itemList.value.length == 0 ) {
+    notify("Pls fill items");
+  } else {
+   
+  try {  
+      const response = await axios.post("shoplist", {  //here we send information from object to our api
+        title : nameList.value,
+        items:  itemList.value,
+        creator : my_id.value //here I get Id from cookie
+      });
+      console.log(useCookie);
+      router.push({ path: "/home" });
+    } catch (error) {
+      console.error(error);
+      console.log(error?.response?.data.message);
+      notify(error?.response.data.message);
+    }
+  }
 };
+
+
+const notify = (content: any) => {
+  toast(content, {
+    theme: "dark",
+    type: "faild",
+    position: "bottom-right",
+    rtl: true,
+    transition: "zoom",
+    dangerouslyHTMLString: true,
+  });
+};
+
 </script>
 
 <template>
@@ -78,8 +122,8 @@ const handleAddButton = () => {
     </div>
     <!-- End : step 2 :................... -->
     
-    <buttom class="w-10 h-10 flex rounded-full bg-orange-400 right-5 bottom-20 fixed items-center text-center">
-     <Icon name="solar:chat-round-check-bold-duotone"  color="gray-400" size="30" /></buttom>
+    <buttom @click="saveList" >
+     <Icon class="w-10 h-10 flex rounded-full bg-orange-200 right-5 bottom-20 fixed items-center text-center" name="solar:chat-round-check-bold-duotone"  color="gray-100" size="30" /></buttom>
 
   </div>
 </template>
