@@ -9,10 +9,17 @@
     <div  class="bg-white fixed bottom-0 py-4 w-screen">
       <div class="container mx-auto grid grid-cols-4 gap-4">
         <div>
-          <row  class="inline-flex w-full justify-center">
+
+          <NuxtLink to="/">
+            <row type="button" class="inline-flex w-full justify-center">
             <!-- <span class="table-group">Lists</span> -->
-            <Icon name="solar:bag-smile-bold-duotone" color="gray" size="30" />
+            <Icon name="solar:home-bold-duotone" color="gray" size="30" />
           </row>
+     
+  </NuxtLink>
+
+
+          
         </div>
         <div>
           <row class="inline-flex w-full justify-center ">

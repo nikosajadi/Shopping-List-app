@@ -78,9 +78,9 @@ const handleAddButton = () => {
     </div>
     <!-- End : step 2 :................... -->
     
-    <NuxtLink to="/">
-      <p type="button" class=" flex text-orange-400 absolute bottom-20 right-5 h-8 w-8 ">Home</p>
-  </NuxtLink>
+    <buttom class="w-10 h-10 flex rounded-full bg-orange-400 right-5 bottom-20 fixed items-center text-center">
+     <Icon name="solar:chat-round-check-bold-duotone"  color="gray-400" size="30" /></buttom>
+
   </div>
 </template>
 
