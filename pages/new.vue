@@ -79,7 +79,7 @@ const notify = (content: any) => {
     <div v-if="!status" class="mt-10 px-5">
       <div class="flex w-full text-center">
         <h1 class="h1-title">NeW😍List</h1>
-        {{ status }}
+        <!-- {{ status }} -->
       </div>
       <input
         v-model="nameList"
@@ -131,7 +131,7 @@ const notify = (content: any) => {
     >
       <Icon
         class="w-10 h-10"
-        name="solar:chat-round-check-bold-duotone"
+        name="solar:archive-broken"
         color="white"
         size="30"
       />
