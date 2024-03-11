@@ -10,7 +10,7 @@
       <div class="container mx-auto grid grid-cols-4 gap-4">
         <div>
 
-          <NuxtLink to="/">
+          <NuxtLink to="/home">
             <row type="button" class="inline-flex w-full justify-center">
             <!-- <span class="table-group">Lists</span> -->
             <Icon name="solar:home-bold-duotone" color="gray" size="30" />

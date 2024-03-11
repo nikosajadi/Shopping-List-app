@@ -2,7 +2,7 @@
 definePageMeta({
   layout: "weeklyshopping",
 });
-
+const router = useRouter();
 const route = useRoute();
 import axios from "axios";
 axios.defaults.baseURL = "https://backend-sajadi.mrghanavati.ir/";
@@ -35,14 +35,25 @@ onMounted(async () => {
   }
 });
 
-// Your other functions
+const deleted = async () => {
+  try {
+    await axios.delete(`shoplist/${listID}`);
+    // After successful deletion, navigate back to the home page
+    router.push({ path: '/home' });
+  } catch (error) {
+    console.error(error);
+    console.log(error?.response?.data.message);
+    notify(error?.response.data.message);
+  }
+};
+
 </script>
 
 <template>
   <div>
     <h2
       @click="saveList"
-      class="mb-2 text-lg font-semibold text-gray-900 dark:text-white text-gray-900 bg-gradient-100 font-medium rounded-lg text-sm w-full py-2 text-center me-2 mb-4 mt-10"
+      class="mb-2 text-lg font-extrabold text-orange-900 dark:text-white text-gray-900 bg-gradient-100 font-larg rounded-xl text-sm w-full py-2 text-center me-2 mb-4 mt-10"
     >
       🥳{{ listName }}:
     </h2>
@@ -67,11 +78,22 @@ onMounted(async () => {
         </svg>
     </span>
   </label>
-  <label class="mt-px font-light text-orang-700 cursor-pointer select-none" htmlFor="check">
+  <label class="mt-px font-semibold text-orang-700 cursor-pointer select-none" htmlFor="check">
     {{ item.title }}
   </label>
 </div> 
       </li>
     </ul>
+    <div
+      @click="deleted"
+      class="p-3 flex rounded-full bg-orange-800 right-5 bottom-20 fixed items-center"
+    >
+      <Icon
+        class="w-10 h-10"
+        name="solar:trash-bin-minimalistic-broken"
+        color="white"
+        size="30"
+      />
+    </div>
   </div>
 </template>
