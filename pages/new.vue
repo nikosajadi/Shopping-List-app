@@ -9,14 +9,12 @@ import "vue3-toastify/dist/index.css";
 import axios from "axios";
 axios.defaults.baseURL = "https://backend-sajadi.mrghanavati.ir/";
 
-
 const router = useRouter();
 const status = ref(false);
 const nameList = ref("");
 const inputText = ref("");
 const itemList = ref([]);
 const my_id = useCookie("token_id");
-
 
 const goTolist = () => {
   if (nameList.value == "") {
@@ -38,21 +36,20 @@ const handleAddButton = () => {
   itemList.value.push(inputText.value);
   // Clear the input after adding the value to the list
   inputText.value = "";
-}; 
-
+};
 
 const saveList = async () => {
-  if (nameList.value === "" ) {
+  if (nameList.value === "") {
     notify("Pls choose name for shopping list");
-  } else if (itemList.value.length == 0 ) {
+  } else if (itemList.value.length == 0) {
     notify("Pls fill items");
   } else {
-   
-  try {  
-      const response = await axios.post("shoplist", {  //here we send information from object to our api
-        title : nameList.value,
-        items:  itemList.value,
-        creator : my_id.value //here I get Id from cookie
+    try {
+      const response = await axios.post("shoplist", {
+        //here we send information from object to our api
+        title: nameList.value,
+        items: itemList.value,
+        creator: my_id.value, //here I get Id from cookie
       });
       console.log(useCookie);
       router.push({ path: "/home" });
@@ -64,7 +61,6 @@ const saveList = async () => {
   }
 };
 
-
 const notify = (content: any) => {
   toast(content, {
     theme: "dark",
@@ -75,7 +71,6 @@ const notify = (content: any) => {
     dangerouslyHTMLString: true,
   });
 };
-
 </script>
 
 <template>
@@ -91,7 +86,7 @@ const notify = (content: any) => {
         type="text"
         id="disabled-input"
         aria-label="disabled input"
-        class="input"
+        class="text-gray-900 bg-gradient-100 font-medium rounded-lg text-sm w-full py-2 text-center me-2 mb-4 mt-10"
       />
       <button @click="goTolist" class="button">ok</button>
     </div>
@@ -101,30 +96,46 @@ const notify = (content: any) => {
      
     20-->
     <div v-else class="mt-10 px-5">
-      <h1 class="h1-title">🥳{{ nameList }}</h1>
-      <div class="input-container flex flex-row">
+      <h1 class="h1-title mb-10">🥳{{ nameList }}</h1>
+
+      <div class="relative mb-4 flex w-full flex-wrap items-stretch">
         <input
           v-model="inputText"
-          placeholder="Type here..."
           type="text"
-          id="disabled-input"
-          aria-label="disabled input"
-          class="input"
+          class="relative bg-white m-0 -me-px block flex-auto rounded-s border border-solid border-neutral-200 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-surface outline-none transition duration-200 ease-in-out placeholder:text-neutral-500 focus:z-[3] focus:border-primary focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:text-white dark:placeholder:text-neutral-200 dark:autofill:shadow-autofill dark:focus:border-primary"
+          placeholder="Add items here..."
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
         />
-        <button class="relative" @click="handleAddButton">
-          <Icon name="solar:add-square-line-duotone" class="relative rounded h-18 w-18  hover:bg-orange-200 mt-10 mb-4 " color="gray-400" size="30" />
+        <button
+          @click="handleAddButton"
+          class="z-[2] bg-white  inline-block rounded-s border-2 border-primary-100 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:border-primary-accent-200 hover:bg-secondary-50/50 focus:border-primary-accent-200 focus:bg-secondary-50/50 focus:outline-none focus:ring-0 active:border-primary-accent-200 dark:border-primary-400 dark:text-primary-300 dark:hover:bg-blue-950 dark:focus:bg-white "
+          data-twe-ripple-init
+          type="button"
+          id="button-addon2"
+        >
+          Add
         </button>
       </div>
+
       <!-- Display the itemList -->
       <ul>
         <li v-for="(item, index) in itemList" :key="index">{{ item }}</li>
       </ul>
     </div>
     <!-- End : step 2 :................... -->
-    
-    <buttom @click="saveList" >
-     <Icon class="w-10 h-10 flex rounded-full bg-orange-200 right-5 bottom-20 fixed items-center text-center" name="solar:chat-round-check-bold-duotone"  color="gray-100" size="30" /></buttom>
 
+    <div
+      @click="saveList"
+      class="p-3 flex rounded-full bg-orange-800 right-5 bottom-20 fixed items-center"
+    >
+      <Icon
+        class="w-10 h-10"
+        name="solar:chat-round-check-bold-duotone"
+        color="white"
+        size="30"
+      />
+    </div>
   </div>
 </template>
 
@@ -132,15 +143,11 @@ const notify = (content: any) => {
 .button {
   @apply text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm w-full py-2.5 text-center me-2 mb-2;
 }
-.input {
-  @apply mt-10 mb-4 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500;
-}
+
 .h1-title {
   @apply mt-10 pt-10 text-3xl w-full text-center font-extrabold leading-none;
 }
 .input-container {
   position: relative;
 }
-
-
 </style>
