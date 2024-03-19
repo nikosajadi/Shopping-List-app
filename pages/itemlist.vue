@@ -47,6 +47,16 @@ const deleted = async () => {
   }
 };
 
+const updateItem = async (itemID:Number) => {
+  try {
+    await axios.patch(`shoplist/${itemID}`);
+  } catch (error) {
+    console.error(error);
+    console.log(error?.response?.data.message);
+    notify(error?.response.data.message);
+  }
+};
+
 </script>
 
 <template>
@@ -62,7 +72,7 @@ const deleted = async () => {
 
     <ul class="max-w-md space-y-1 text-orange-700  list-inside dark:text-gray-500"
     >
-      <li  v-for="(item, index) in items" :key="index">
+      <li  v-for="(item, index) in items" :key="index" @click="updateItem(item.id)"> 
         <div class="inline-flex items-center">
   <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="check">
     <input type="checkbox"
