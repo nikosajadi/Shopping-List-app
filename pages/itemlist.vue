@@ -34,7 +34,7 @@ onMounted(async () => {
     notify(error?.response.data.message);
   }
 });
-
+//use delete  Api to remove the list from the list 
 const deleted = async () => {
   try {
     await axios.delete(`shoplist/${listID}`);
@@ -47,6 +47,7 @@ const deleted = async () => {
   }
 };
 
+// used the Patch api for check items of our list a kind of check box
 const updateItem = async (itemID:Number) => {
   try {
     await axios.patch(`shoplist/${itemID}`);
