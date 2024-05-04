@@ -1,14 +1,17 @@
 <script setup lang="ts">
+// Define page metadata
 definePageMeta({
   middleware: ["auth-user"],
   layout: "weeklyshopping",
 });
-
+// Import necessary modules
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import axios from "axios";
+// Set base URL for axios requests
 axios.defaults.baseURL = "https://backend-sajadi.mrghanavati.ir/";
 
+// Define router and reactive variables
 const router = useRouter();
 const status = ref(false);
 const nameList = ref("");
@@ -16,6 +19,7 @@ const inputText = ref("");
 const itemList = ref([]);
 const my_id = useCookie("token_id");
 
+// Function to proceed to the next step or display notification if inputs are invalid
 const goTolist = () => {
   if (nameList.value == "") {
     toast("Hello🙂! pls fill items!", {
@@ -31,6 +35,7 @@ const goTolist = () => {
   }
 };
 
+// Function to handle adding items to the list
 const handleAddButton = () => {
   // Push the input value into the itemList array
   itemList.value.push(inputText.value);
@@ -38,6 +43,7 @@ const handleAddButton = () => {
   inputText.value = "";
 };
 
+// Function to save the list
 const saveList = async () => {
   if (nameList.value === "") {
     notify("Pls choose name for shopping list");
@@ -46,7 +52,7 @@ const saveList = async () => {
   } else {
     try {
       const response = await axios.post("shoplist", {
-        //here we send information from object to our api
+        //here we send information from object to our Api
         title: nameList.value,
         items: itemList.value,
         creator: my_id.value, //here I get Id from cookie
@@ -60,7 +66,7 @@ const saveList = async () => {
     }
   }
 };
-
+// Function to display notification
 const notify = (content: any) => {
   toast(content, {
     theme: "dark",
@@ -97,8 +103,11 @@ const notify = (content: any) => {
     20-->
     <div v-else class="mt-10 px-5">
       <h1 class="h1-title mb-10">🥳{{ nameList }}</h1>
-
+ 
+           <!-- Input container for adding items -->
       <div class="relative mb-4 flex w-full flex-wrap items-stretch">
+
+           <!-- Input field for adding items -->
         <input
           v-model="inputText"
           type="text"
