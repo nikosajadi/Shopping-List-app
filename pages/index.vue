@@ -6,7 +6,7 @@ const router = useRouter();
 const steps = ref(0);
 const goToStart = () => {
   router.push({
-    path: "/login",
+    path: "/splash",
   });
 };
 

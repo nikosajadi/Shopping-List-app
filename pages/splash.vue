@@ -5,7 +5,7 @@ const router = useRouter();
 onMounted(async () => {
 
   setTimeout(() => {
-    router.push({ path: "/home" });
+    router.push({ path: "/login" });
   }, 3000);
 });
 </script>
@@ -16,7 +16,7 @@ onMounted(async () => {
             <p class=" FiraCode-SemiBold text-2xl " >Shared Shopping List</p>
             <p class=" FiraCode-SemiBold text-base">Sharing Shoping List</p>
         </div>
-        <Footer />
+       
     </div>
   
 </template>
