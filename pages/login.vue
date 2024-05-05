@@ -7,19 +7,23 @@ definePageMeta({
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import axios from "axios";
+
+// Set base URL for axios requests
 axios.defaults.baseURL = "https://backend-sajadi.mrghanavati.ir/";
 
-// windows V
+// Define reactive variables and cookies
 const my_token = useCookie("token", { maxAge: 8640 * 1000 });
 const my_id = useCookie("token_id", { maxAge: 8640 * 1000 });
 const my_name = useCookie("token_name", { maxAge: 8640 * 1000 });
 
+// Define router and form data
 const router = useRouter();
 const mode = ref("login");
 const Email = ref("");
 const Password = ref("");
 const displayName = ref("");
 
+// Function to handle user registration
 const singUp = async () => {
   if (Email.value === "" || Password.value === "" || displayName.value === "") {
     notify("Please fill values");
@@ -32,9 +36,12 @@ const singUp = async () => {
       });
       console.log(response);
 
+      // Store user information in cookies
       my_token.value = response.data.token;
       my_id.value = response.data.id;
       my_name.value = response.data.name;
+
+    // Redirect to the home page
       router.push({ path: "/home" });
     } catch (error) {
       console.error(error);
@@ -44,6 +51,7 @@ const singUp = async () => {
   }
 };
 
+// Function to display notification
 const notify = (content: any) => {
   toast(content, {
     theme: "dark",
@@ -83,23 +91,26 @@ const signIn = async () => {
 </script>
 <template>
   <div>
+     <!-- Header -->
     <div class="flex w-full text-center">
       <h1 class="pt-10 text-3xl w-full text-center font-extrabold leading-none">
         FAMILY <br />SH😍PPING
       </h1>
     </div>
-
+         <!-- Mode selector -->
     <div>
       <div
         class="inline-flex w-full justify-center shadow-sm w-screen"
         role="group"
       >
+       <!-- Login mode -->
         <span
           class="table-group"
           @click="mode = 'login'"
           :class="{ active: mode == 'login' }"
           >login</span
         >
+         <!-- Register mode -->
         <span
           class="table-group"
           @click="mode = 'Register'"
@@ -108,10 +119,11 @@ const signIn = async () => {
         >
       </div>
     </div>
-
+       <!-- Login form -->
     <div v-if="mode === 'login'">
       <div class="form-group">
         <div class="md:w-2/3">
+          <!-- Email input -->
           <input
             v-model="Email"
             type="text"
@@ -119,6 +131,7 @@ const signIn = async () => {
             placeholder="Email"
             class="form-control"
           />
+              <!-- Password input -->
           <input
             v-model="Password"
             type="password"
@@ -126,6 +139,7 @@ const signIn = async () => {
             placeholder="Password"
             class="form-control"
           />
+            <!-- Sign in button -->
           <button
             @click="signIn"
             class="text-white mt-6 mb-3 w-full font-bold py-4 px-4 rounded-2xl bg-gradient-to-br from-pink-200 to-orange-400"
@@ -135,10 +149,11 @@ const signIn = async () => {
         </div>
       </div>
     </div>
-
+     <!-- Registration form --> 
     <div v-else class="active">
       <div class="form-group">
         <div class="md:w-2/3">
+           <!-- Email input -->
           <input
             v-model="Email"
             type="text"
@@ -146,6 +161,7 @@ const signIn = async () => {
             placeholder="Email"
             class="form-control"
           />
+          <!-- Password input -->
           <input
             v-model="Password"
             type="password"
@@ -153,7 +169,7 @@ const signIn = async () => {
             placeholder="Password"
             class="form-control"
           />
-
+            <!-- Display name input -->
           <h3 class="mb-5 mt-5 text-ml leading-none text-gray-400">
             Other users can add you to their family by searching for your
             username
@@ -165,6 +181,7 @@ const signIn = async () => {
             placeholder="Display Name"
             class="form-control"
           />
+          <!-- Sign up button -->
           <button
             @click="singUp"
             class="text-white mt-6 mb-3 w-full font-bold py-4 px-4 rounded-2xl bg-gradient-to-br from-pink-200 to-orange-400"
