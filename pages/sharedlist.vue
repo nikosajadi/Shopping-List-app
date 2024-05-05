@@ -1,5 +1,13 @@
 <script setup lang="ts">
 
+const router = useRouter();
+
+onMounted(async () => {
+
+  setTimeout(() => {
+    router.push({ path: "/home" });
+  }, 3000);
+});
 </script>
 <template>
     <div class= "bg-orange-100 w-full h-screen cursor-pointer ">
