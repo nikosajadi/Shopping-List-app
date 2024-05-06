@@ -123,6 +123,7 @@ const switchToRegisterTab = () => {
           >Register</span
         >
       </div>
+      
     </div>
        <!-- Login form -->
     <div v-if="mode === 'login'">
@@ -157,7 +158,7 @@ const switchToRegisterTab = () => {
           </button>
           
         </div>
-                       <!-- "Don't have an account?" link -->
+      <!-- "Don't have an account?" link -->
      <div class="text-center mt-2">
       <NuxtLink @click="switchToRegisterTab" class="text-gray-500 underline">Don't have an account?</NuxtLink>
     </div>
@@ -189,26 +190,29 @@ const switchToRegisterTab = () => {
             class="form-control"
           />
             <!-- Display name input -->
-          <h3 class="mb-5 mt-5 text-ml leading-none text-gray-400">
-            Other users can add you to their family by searching for your
-            username
+          <h3 class="mb-1 mt-5 text-ml leading-none text-gray-400">
+           What do they call you?
           </h3>
           <input
             v-model="displayName"
             type="text"
             id="displayName"
-            placeholder="Display Name"
-            class="form-control"
+            placeholder="Enter your FirstName"
+            class="form-control text-center"
           />
           <!-- Sign up button -->
           <button
             @click="singUp"
-            class="text-white mt-6 mb-3 w-full font-bold py-4 px-4 rounded-2xl bg-gradient-to-br from-pink-200 to-orange-400"
+            class="text-white mt-6 mb-3 w-full font-bold py-4 px-4 rounded-2xl bg-gradient-to-br from-pink-200 to-orange-400 border border-gray-500"
           >
             Sign Up
           </button>
 
         </div>
+      <!-- "Don't have an account?" link -->
+     <div class="text-center mt-2">
+      <NuxtLink to="/" class="text-gray-500 underline">Don't have an account?</NuxtLink>
+    </div>
       </div>
          
     </div>
