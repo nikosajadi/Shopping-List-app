@@ -74,7 +74,7 @@ const signIn = async () => {
         nuser: nuser.value,
         password: Password.value,
       });
-      console.log(response);
+      console.log("testt : " ,response);
 
       my_token.value = response.data.token;
       my_id.value = response.data.id;
@@ -237,7 +237,7 @@ const toggleShowPassword = () => {
             @click="singUp"
             class="text-white mt-6 mb-3 w-full font-bold py-4 px-4 rounded-2xl bg-gradient-to-br from-pink-200 to-orange-400 border border-gray-500"
           >
-            Sign Up
+            Register
           </button>
         </div>
         <!-- "Don't have an account?" link -->
