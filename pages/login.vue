@@ -35,6 +35,8 @@ const singUp = async () => {
         name: displayName.value,
       });
       console.log(response);
+      
+
 
       // Store user information in cookies
       my_token.value = response.data.token;
@@ -86,7 +88,10 @@ const signIn = async () => {
     }
   }
 };
-
+// Function to switch to registration tab
+const switchToRegisterTab = () => {
+  mode.value = 'Register'; // Set mode to 'Register' to activate registration tab
+};
 
 </script>
 <template>
@@ -108,7 +113,7 @@ const signIn = async () => {
           class="table-group"
           @click="mode = 'login'"
           :class="{ active: mode == 'login' }"
-          >login</span
+          >Login Here</span
         >
          <!-- Register mode -->
         <span
@@ -123,50 +128,64 @@ const signIn = async () => {
     <div v-if="mode === 'login'">
       <div class="form-group">
         <div class="md:w-2/3">
-          <!-- Email input -->
+          <!-- UserName input -->
+          <label class="block text-gray-400 text-sm font-bold mb-1 ml-2" for="username">
+            Username
+          </label>
           <input
             v-model="Email"
             type="text"
             id="email"
-            placeholder="Email"
             class="form-control"
           />
               <!-- Password input -->
+           <label class="block text-gray-400 text-sm font-bold mt-2 ml-2" for="Password">
+                Password
+              </label>
           <input
             v-model="Password"
             type="password"
             id="password"
-            placeholder="Password"
             class="form-control"
           />
             <!-- Sign in button -->
           <button
             @click="signIn"
-            class="text-white mt-6 mb-3 w-full font-bold py-4 px-4 rounded-2xl bg-gradient-to-br from-pink-200 to-orange-400"
+            class="text-white mt-6 mb-3 w-full font-bold py-4 px-4 rounded-2xl bg-gradient-to-br from-pink-200 to-orange-400 border border-gray-600"
           >
-            Sign In
+            Login
           </button>
+          
         </div>
+                       <!-- "Don't have an account?" link -->
+     <div class="text-center mt-2">
+      <NuxtLink @click="switchToRegisterTab" class="text-gray-500 underline">Don't have an account?</NuxtLink>
+    </div>
       </div>
+
     </div>
      <!-- Registration form --> 
     <div v-else class="active">
       <div class="form-group">
         <div class="md:w-2/3">
-           <!-- Email input -->
+           <!-- UserName input -->
+           <label class="block text-gray-400 text-sm font-bold mb-2 ml-2" for="username">
+            Username
+          </label>
           <input
             v-model="Email"
             type="text"
             id="email"
-            placeholder="Email"
             class="form-control"
           />
           <!-- Password input -->
+          <label class="block text-gray-400 text-sm font-bold mt-2 ml-2" for="Password">
+            Password
+          </label>
           <input
             v-model="Password"
             type="password"
             id="password"
-            placeholder="Password"
             class="form-control"
           />
             <!-- Display name input -->
@@ -191,9 +210,10 @@ const signIn = async () => {
 
         </div>
       </div>
+         
     </div>
 
-    <NuxtLink to="/"></NuxtLink>
+
   </div>
 </template>
 
