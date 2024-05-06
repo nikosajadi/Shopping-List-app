@@ -22,6 +22,8 @@ const mode = ref("login");
 const Email = ref("");
 const Password = ref("");
 const displayName = ref("");
+// Define reactive variable for controlling password visibility
+const showPassword = ref(false);
 
 // Function to handle user registration
 const singUp = async () => {
@@ -93,6 +95,11 @@ const switchToRegisterTab = () => {
   mode.value = 'Register'; // Set mode to 'Register' to activate registration tab
 };
 
+
+// Function to toggle password visibility
+const toggleShowPassword = () => {
+  showPassword.value = !showPassword.value;
+};
 </script>
 <template>
   <div>
@@ -140,15 +147,43 @@ const switchToRegisterTab = () => {
             class="form-control"
           />
               <!-- Password input -->
-           <label class="block text-gray-400 text-sm font-bold mt-2 ml-2" for="Password">
-                Password
-              </label>
-          <input
-            v-model="Password"
-            type="password"
-            id="password"
-            class="form-control"
-          />
+
+<label class="block text-gray-400 text-sm font-bold mt-2 ml-2" for="Password">
+  Password
+</label>
+<div class="relative">
+  <input
+    v-model="Password"
+    :type="showPassword ? 'text' : 'password'"
+    id="password"
+    placeholder="Password"
+    class="form-control pr-10" 
+  />
+  <span class="absolute inset-y-0 right-0 pr-3 flex items-center">
+    <svg
+      @click="toggleShowPassword"
+      class="h-6 w-6 text-gray-500 cursor-pointer"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        :class="{ 'hidden': showPassword }"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+      />
+      <path
+        :class="{ 'hidden': !showPassword }"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 17l-4.67-4.67M7.5 10a5 5 0 018.33-3.61m-1.54 3.08a2 2 0 10-2.72-2.89m0 0a2 2 0 102.72 2.89"
+      />
+    </svg>
+  </span>
+</div>
             <!-- Sign in button -->
           <button
             @click="signIn"
