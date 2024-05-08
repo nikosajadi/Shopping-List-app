@@ -5,6 +5,13 @@ const list = [
   { title: "Banana", color: "yellow", count: 3 },
   { title: "Grapes", color: "purple", count: 2 }
 ];
+
+const router = useRouter();
+const goToNew = ()=> {
+    router.push({ path: "/new" })
+}
+
+
 </script>
 
 
@@ -20,16 +27,29 @@ const list = [
          <p class=" FiraCode-SemiBold text-base pt-6">Today's Shopping List</p>
          <div>
             <ul>
-                <li v-for="(item, index) in list" :key="index">
-                  
-                </li>
-              </ul>
-         </div>
+              <li v-for="(item, index) in list" :key="index">
+                <!-- Use the ShoppingItem component -->
+                <ShoppingItem :item="item" />
+              </li>
+            </ul>
+          </div>
          <NuxtLink to="/more" class="text-gray-500 text-center underline pt-10">Show Other Day Shopping List</NuxtLink>
       </div>
 
       
-      
+      <!-- Delete button -->
+    <div
+    @click="goToNew"
+    class="p-4 flex rounded-full  right-5 bottom-20 fixed items-center"
+  >
+    <!-- Trash bin icon -->
+    <Icon
+      class="w-20 h-20"
+      name=solar:add-circle-bold
+      color="#92400e"
+      size="30"
+    />
+  </div>
 </div>
 
      
