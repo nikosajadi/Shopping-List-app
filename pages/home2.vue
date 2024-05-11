@@ -13,9 +13,6 @@ const goToNew = ()=> {
 
 
 </script>
-
-
-
 <template>
     
     <div class="bg-amber-50 w-full h-screen cursor-pointer ">
@@ -42,7 +39,7 @@ const goToNew = ()=> {
     @click="goToNew"
     class="p-4 flex rounded-full  right-5 bottom-20 fixed items-center"
   >
-    <!-- Trash bin icon -->
+    <!-- pluse  icon -->
     <Icon
       class="w-20 h-20"
       name=solar:add-circle-bold
