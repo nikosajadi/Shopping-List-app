@@ -1,6 +1,6 @@
 <template>
   <div class="w-screen overflow-x-hidden h-screen">
-    <!-- <title /> -->
+    <title />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
