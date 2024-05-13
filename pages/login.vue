@@ -18,7 +18,6 @@ const my_name = useCookie("token_name", { maxAge: 8640 * 1000 });
 
 // Define router and form data
 const router = useRouter();
-const mode = ref("login");
 const nuser = ref("");
 const Password = ref("");
 const displayName = ref("");
@@ -89,7 +88,9 @@ const signIn = async () => {
 };
 // Function to switch to registration tab
 const switchToRegisterTab = () => {
-  mode.value = "Register"; // Set mode to 'Register' to activate registration tab
+  router.push({
+    path: "/register",
+  }); // Set mode to 'Register' to activate registration tab
 };
 
 // Function to toggle password visibility
@@ -112,23 +113,12 @@ const toggleShowPassword = () => {
         role="group"
       >
         <!-- Login mode -->
-        <span
-          class="table-group"
-          @click="mode = 'login'"
-          :class="{ active: mode == 'login' }"
-          >Login Here</span
-        >
-        <!-- Register mode -->
-        <span
-          class="table-group"
-          @click="mode = 'Register'"
-          :class="{ active: mode == 'Register' }"
-          >Register</span
-        >
+        <span class="mt-9 px-10 py-4 text-sm font-medium text-gray-800 ">Login Here</span>
+        
       </div>
     </div>
     <!-- Login form -->
-    <div v-if="mode === 'login'">
+    <div>
       <div class="form-group">
         <div class="md:w-2/3">
           <!-- UserName input -->
@@ -196,59 +186,11 @@ const toggleShowPassword = () => {
         </div>
       </div>
     </div>
-    <!-- Registration form -->
-    <div v-else class="active">
-      <div class="form-group">
-        <div class="md:w-2/3">
-          <!-- UserName input -->
-          <label
-            class="block text-gray-400 text-sm font-bold mb-2 ml-2"
-            for="username"
-          >
-            Username
-          </label>
-          <input v-model="nuser" type="text" id="nuser" class="form-control" />
-          <!-- Password input -->
-          <label
-            class="block text-gray-400 text-sm font-bold mt-2 ml-2"
-            for="Password"
-          >
-            Password
-          </label>
-          <input
-            v-model="Password"
-            type="password"
-            id="password"
-            class="form-control"
-          />
-          <!-- Display name input -->
-          <h3 class="mb-1 mt-5 text-ml leading-none text-gray-400">
-            What do they call you?
-          </h3>
-          <input
-            v-model="displayName"
-            type="text"
-            id="displayName"
-            placeholder="Enter your FirstName"
-            class="form-control text-center"
-          />
-          <!-- Sign up button -->
-          <button
-            @click="singUp"
-            class="text-white mt-6 mb-3 w-full font-bold py-4 px-4 rounded-2xl bg-gradient-to-br from-pink-200 to-orange-400 border border-gray-500"
-          >
-            Register
-          </button>
+    
         </div>
-        <!-- "Don't have an account?" link -->
-        <div class="text-center mt-2">
-          <NuxtLink to="/" class="text-gray-500 underline"
-            >Don't have an account?</NuxtLink
-          >
-        </div>
-      </div>
-    </div>
-  </div>
+        
+  
+  
 </template>
 
 <style>
