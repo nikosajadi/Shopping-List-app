@@ -18,7 +18,6 @@ const my_name = useCookie("token_name", { maxAge: 8640 * 1000 });
 
 // Define router and form data
 const router = useRouter();
-const mode = ref("login");
 const nuser = ref("");
 const Password = ref("");
 const displayName = ref("");
@@ -65,28 +64,6 @@ const notify = (content: any) => {
   });
 };
 
-const signIn = async () => {
-  if (nuser.value === "" || Password.value === "") {
-    notify("Hello🙂! pls fill items!");
-  } else {
-    try {
-      const response = await axios.post("users/signin", {
-        nuser: nuser.value,
-        password: Password.value,
-      });
-      console.log("testt : " ,response);
-
-      my_token.value = response.data.token;
-      my_id.value = response.data.id;
-      my_name.value = response.data.name;
-      router.push({ path: "/home" });
-    } catch (error) {
-      console.error(error);
-      console.log(error?.response?.data.message);
-      notify(error?.response.data.message);
-    }
-  }
-};
 // Function to switch to login tab
 const switchToLoginTab = () => {
     router.push({
@@ -115,17 +92,11 @@ const toggleShowPassword = () => {
       >
   
         <!-- Register mode -->
-        <span
-          class="table-group"
-        
-          :class="{ active: mode == 'Register' }"
-          >Register</span
-        >
+        <span class="mt-9 px-10 py-4 text-sm font-medium text-gray-800 ">Register</span>
       </div>
     </div>
 
     <!-- Registration form -->
-
       <div class="form-group">
         <div class="md:w-2/3">
           <!-- UserName input -->
