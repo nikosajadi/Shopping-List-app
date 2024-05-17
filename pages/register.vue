@@ -18,7 +18,7 @@ const my_name = useCookie("token_name", { maxAge: 8640 * 1000 });
 
 // Define router and form data
 const router = useRouter();
-const nuser = ref("");
+const username = ref("");
 const Password = ref("");
 const displayName = ref("");
 // Define reactive variable for controlling password visibility
@@ -26,12 +26,12 @@ const showPassword = ref(false);
 
 // Function to handle user registration
 const singUp = async () => {
-  if (nuser.value === "" || Password.value === "" || displayName.value === "") {
+  if (username.value === "" || Password.value === "" || displayName.value === "") {
     notify("Please fill values");
   } else {
     try {
       const response = await axios.post("users/signup", {
-        nuser: nuser.value,
+        username: username.value,
         password: Password.value,
         name: displayName.value,
       });
@@ -106,7 +106,7 @@ const toggleShowPassword = () => {
           >
             Username
           </label>
-          <input v-model="nuser" type="text" id="nuser" class="form-control" />
+          <input v-model="username" type="text" id="username" class="form-control" />
           <!-- Password input -->
           <label
             class="block text-gray-400 text-sm font-bold mt-2 ml-2"
@@ -168,7 +168,7 @@ const toggleShowPassword = () => {
 
 input[type="text"],
 input[type="password"],
-input[type="nuser"] {
+input[type="username"] {
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
