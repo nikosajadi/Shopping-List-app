@@ -95,6 +95,17 @@ const notify = (content: any) => {
         class="text-gray-900 bg-gradient-100 font-medium rounded-lg text-sm w-full py-2 text-center me-2 mb-4 mt-10"
       />
       <button @click="goTolist" class="button">ok</button>
+      <div
+      @click="saveList"
+      class="p-3 flex rounded-full bg-orange-700 right-5 bottom-20 fixed items-center ..............."
+    >
+      <Icon
+        class="w-10 h-10"
+        name="solar:archive-broken"
+        color="white"
+        size="30"
+      />
+    </div>
     </div>
     <!-- End : step 1 :................... -->
 
@@ -131,12 +142,23 @@ const notify = (content: any) => {
       <ul>
         <li v-for="(item, index) in itemList" :key="index">{{ item }}</li>
       </ul>
+      <div
+      @click="saveList"
+      class="p-3 flex rounded-full bg-green-700 right-5 bottom-20 fixed items-center"
+    >
+      <Icon
+        class="w-10 h-10"
+        name="solar:check-read-line-duotone"
+        color="white"
+        size="30"
+      />
+    </div>
     </div>
     <!-- End : step 2 :................... -->
 
-    <div
+    <!-- <div
       @click="saveList"
-      class="p-3 flex rounded-full bg-orange-800 right-5 bottom-20 fixed items-center"
+      class="p-3 flex rounded-full bg-green-800 right-5 bottom-20 fixed items-center"
     >
       <Icon
         class="w-10 h-10"
@@ -144,7 +166,7 @@ const notify = (content: any) => {
         color="white"
         size="30"
       />
-    </div>
+    </div> -->
   </div>
 </template>
 
