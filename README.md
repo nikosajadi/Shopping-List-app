@@ -10,9 +10,9 @@ This is a simple **Shopping List App** built using **Nuxt.js**. The app allows u
 - Responsive design for mobile and desktop
 
 ## Technology Stack
-- **Nuxt.js**: Vue.js framework for building server-side rendered applications
-- **TypeScript**: Used for type-safe development
-- **Tailwind CSS**: For styling
+**Nuxt.js**: Vue.js framework for building server-side rendered applications
+ **TypeScript**: Used for type-safe development
+**Tailwind CSS**: For styling
 
 
 
